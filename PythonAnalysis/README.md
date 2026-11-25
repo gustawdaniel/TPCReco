@@ -51,10 +51,11 @@ Hits are selected with `--output.mlHitFilter`:
 The filters work per strip section: for a strip divided into sections, only the sections passing
 the filter contribute to the merged hit.
 
-Event selection: `tpcWriter` writes only events with two or three track segments (two and three
-prong events: generated segments for MC, reconstructed segments for data), and for MC only events
-with the ends of all segments inside the fiducial volume (|x| < 140 mm, |y| < 90 mm,
-|z| < drift cage limit − 5 mm). The automatic reconstruction currently returns two segments.
+Event selection: for MC `tpcWriter` writes only events with two or three generated track segments
+(two and three prong events) and with the ends of all segments inside the fiducial volume
+(|x| < 140 mm, |y| < 90 mm, |z| < drift cage limit − 5 mm). For data it writes all events with at
+least one reconstructed segment (also one segment events: single tracks, dots). A missing segment is
+filled with zeros in the target; use `n_reco_segments` (`keep_info=True`) to tell it apart. The automatic reconstruction currently returns two segments.
 The `eventFilter` settings of the configuration apply as well (`--eventFilter.enabled false` to switch it off).
 
 Size: for real data the `MLData` tree with the `threshold` filter takes about 0.02 MB/event.
